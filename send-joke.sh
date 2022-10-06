@@ -5,10 +5,10 @@ post_joke () {
   curl -s -H 'Content-Type: application/json' --data "{\"content\" : \"$PRELUDE \n$JOKE $SIGN_OFF \"}" "$WEBHOOK" > /dev/null
 }
 
-PRELUDE="but first, a joke... \n"
+PRELUDE="First, a joke... \n"
 JOKE=$(curl -s https://icanhazdadjoke.com)
 WEBHOOK="$BETTY_WEBHOOK"
-SIGN_OFF="\n\nmmmmhahahahAHAHAHA \n\n   ENOUGH!"
+SIGN_OFF="\n\nghhya hahah haha haha - ENOUGH!"
 
 if [ -z "$JOKE" ]; then
   PRELUDE="I'm bleeding which makes me the victor."
