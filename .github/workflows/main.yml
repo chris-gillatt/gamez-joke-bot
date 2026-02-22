@@ -16,6 +16,8 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -27,3 +29,10 @@ jobs:
           WIMPLO_WEBHOOK: ${{ secrets.WIMPLO_WEBHOOK }}
         # Runs a single command using the runners shell
         run: ./send-joke.sh
+      - name: Keep repo active with empty commit
+        if: ${{ github.event_name == 'schedule' }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit --allow-empty -m "chore: keep send-a-joke workflow active"
+          git push
